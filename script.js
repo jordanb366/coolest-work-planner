@@ -9,12 +9,12 @@ $("#currentDay").text(todaysDate);
 
 // Declared variable for day js hour is in 24 hour time format
 var currentTime = dayjs().hour();
-console.log(currentTime);
+
 
 // Adds classes to the description text area
 $(".description").each(function(){
      var textAreaTime = $(this).attr("id");
-     console.log(textAreaTime);
+    
      if (currentTime > textAreaTime) {
         $(this).addClass("past");
      } else if (currentTime < textAreaTime) {
@@ -58,6 +58,8 @@ function savePlanner() {
 function getPlanner() {
 // Use JSON.parse() to convert text to JavaScript object
     var grabSavePlanner = JSON.parse(localStorage.getItem("savedPlanner"));
+
+    if (grabSavePlanner !== null) {
     nineAMInput.text(grabSavePlanner.nineAMInput);
     tenAMInput.text(grabSavePlanner.tenAMInput);
     elevenAMInput.text(grabSavePlanner.elevenAMInput);
@@ -67,12 +69,14 @@ function getPlanner() {
     threePMInput.text(grabSavePlanner.threePMInput);
     fourPMInput.text(grabSavePlanner.fourPMInput);
     fivePMInput.text(grabSavePlanner.fivePMInput);
+    }
 }
 
 // Save button call the functions
 $(".saveBtn").click(function(event) {
     event.preventDefault();
     savePlanner();
+    getPlanner();
 
     });
 
@@ -82,3 +86,5 @@ $(".saveBtn").click(function(event) {
         getPlanner();
       }
       init();
+
+
